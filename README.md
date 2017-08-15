@@ -19,7 +19,7 @@ const encrypt = new Encrypt({
   token: 'weixin'
 })
 
-// How to decode message
+// 如何解密微信传过来的请求body中的Encrypt
 
 console.log(Http_body)
 
@@ -44,7 +44,7 @@ console.log(xmlMsg)
 </xml>
 */
 
-// How to encode message
+// 如何加密xml文本
 
 const encodeStr = encrypt.encode(xmlMsg)
 console.log(encodeStr)
@@ -68,17 +68,17 @@ XpHWFFBEWSZBmKJvj03anXGY5dEViwYBBnTaPyUkoKzPm1fxcCEv0BwvX+7EFywVTkwQNqFpBqKZj23v
 - [encode](#encode)
 - [decode](#decode)
 - [verify](#verify)
-- [getSignature](getSignature)
+- [getSignature](#getSignature)
 
-###### encode
+#### encode
 
 `encode(xmlMsg)` 传入xml文本，返回加密后的base64字符串。
 
-##### decode
+#### decode
 
 `decode(msg_encrypt)` 传入微信请求body中的Encrypt字段值，返回解密后的xml字符串。
 
-##### verify
+#### verify
 
 `verify(data)` 检验消息的完整性。传入微信请求`query`中的`timestamp`, `nonce`, `msg_signature`和请求`body`中的`Encrypt` 返回检验结果`true`或`false`。
 
@@ -90,4 +90,17 @@ XpHWFFBEWSZBmKJvj03anXGY5dEViwYBBnTaPyUkoKzPm1fxcCEv0BwvX+7EFywVTkwQNqFpBqKZj23v
 | nonce | String | 是 | 请求query中的nonce。 |
 | msg_signature | String | 是 | 请求query中的msg_signature。 |
 | msg_encrypt | String | 是 | 请求body中的Encrypt。 |
+
+#### getSignature
+
+`getSignature(data)` 生成`msg_signature`。传入微信请求`query`中的`timestamp`, `nonce`和请求`body`中的`Encrypt` ，返回生成的`signature`。
+
+##### data 参数
+
+| 名称 | 类型 | 必填 | 描述 |
+| --- | --- | --- | --- |
+| timestamp | String | 是 | 请求query中的timestamp。 |
+| nonce | String | 是 | 请求query中的nonce。 |
+| msg_encrypt | String | 是 | 请求body中的Encrypt。 |
+
 
