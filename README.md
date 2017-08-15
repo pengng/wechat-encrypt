@@ -68,7 +68,7 @@ XpHWFFBEWSZBmKJvj03anXGY5dEViwYBBnTaPyUkoKzPm1fxcCEv0BwvX+7EFywVTkwQNqFpBqKZj23v
 - [encode](#encode)
 - [decode](#decode)
 - [verify](#verify)
-- [getSignature](#getSignature)
+- [getSignature](#getsignature)
 
 #### encode
 
