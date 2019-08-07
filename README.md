@@ -14,9 +14,9 @@ npm install wechat-encrypt -S
 const Encrypt = require('wechat-encrypt')
 
 const encrypt = new Encrypt({
-  appId: 'wxf1569d816b304d28',
-  encodingAESKey: 'WO3Gcs2X5lcNtZagAcaRRjNaAwEmoekP1P2aOKR4W3D',
-  token: 'weixin'
+    appId: 'wxf1569d816b304d28',
+    encodingAESKey: 'WO3Gcs2X5lcNtZagAcaRRjNaAwEmoekP1P2aOKR4W3D',
+    token: 'weixin'
 })
 
 // 如何解密微信传过来的请求body中的Encrypt
@@ -25,8 +25,8 @@ console.log(Http_body)
 
 /*
 <xml>
-    <ToUserName><![CDATA[gh_3db049ae940a]]></ToUserName>
-    <Encrypt><![CDATA[XpHWFFBEWSZBmKJvj03anXGY5dEViwYBBnTaPyUkoKzPm1fxcCEv0BwvX+7EFywVTkwQNqFpBqKZj23vJ1QgXi2SshJyvov1hiGfSTIUi2dWpoqH8I2Zhw9XwIkzrOnitGb3vdUAVkSwRTBWtxyTIg3JJPVJPwpLXTYUR+4G2wk5+SIVhBNoepGx7ZwUHK5Sv8ReEDDBwzeFlHl2SAeNA6sH+jvnY8mwNUOxe2fGXge0TteO3U6UWpExJeYuPQIrqNofLcAbPUr7IVkfsm2jqBIH6gWxddNA9U+N0lbQgqKR3LTClM+9GLQFUNLgY7WFyeoZDTIoj8F06uHQTqVd6sGETnFp+c0ff2UQb9bEkJWpZOKnA0cKacw7JyiOUfYmETAdSk6ffULXzqYOYCYlSLxzuFkfO62/hmiHGaMslGNYtwx5Zv31G9kd+Qi1SpGaYJn2q5McnTmht3ptyTyvmQ==]]></Encrypt>
+        <ToUserName><![CDATA[gh_3db049ae940a]]></ToUserName>
+        <Encrypt><![CDATA[XpHWFFBEWSZBmKJvj03anXGY5dEViwYBBnTaPyUkoKzPm1fxcCEv0BwvX+7EFywVTkwQNqFpBqKZj23vJ1QgXi2SshJyvov1hiGfSTIUi2dWpoqH8I2Zhw9XwIkzrOnitGb3vdUAVkSwRTBWtxyTIg3JJPVJPwpLXTYUR+4G2wk5+SIVhBNoepGx7ZwUHK5Sv8ReEDDBwzeFlHl2SAeNA6sH+jvnY8mwNUOxe2fGXge0TteO3U6UWpExJeYuPQIrqNofLcAbPUr7IVkfsm2jqBIH6gWxddNA9U+N0lbQgqKR3LTClM+9GLQFUNLgY7WFyeoZDTIoj8F06uHQTqVd6sGETnFp+c0ff2UQb9bEkJWpZOKnA0cKacw7JyiOUfYmETAdSk6ffULXzqYOYCYlSLxzuFkfO62/hmiHGaMslGNYtwx5Zv31G9kd+Qi1SpGaYJn2q5McnTmht3ptyTyvmQ==]]></Encrypt>
 </xml>
 */
 

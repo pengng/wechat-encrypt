@@ -1,21 +1,21 @@
 {
-  "name": "wechat-encrypt",
-  "version": "1.0.0",
-  "description": "WeChat open platform session message encryption and decryption module.",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/pengng/wechat-encrypt.git"
-  },
-  "keywords": [
-    "wechat",
-    "encrypt",
-    "message"
-  ],
-  "author": "yupeng.kuo <yupeng.kuo@gmail.com>",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/pengng/wechat-encrypt/issues"
-  },
-  "homepage": "https://github.com/pengng/wechat-encrypt#readme"
+    "name": "wechat-encrypt",
+    "version": "1.0.0",
+    "description": "WeChat open platform session message encryption and decryption module.",
+    "main": "lib/encrypt.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/pengng/wechat-encrypt.git"
+    },
+    "keywords": [
+        "wechat",
+        "encrypt",
+        "message"
+    ],
+    "author": "yupeng.kuo <yupeng.kuo@gmail.com>",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/pengng/wechat-encrypt/issues"
+    },
+    "homepage": "https://github.com/pengng/wechat-encrypt#readme"
 }
