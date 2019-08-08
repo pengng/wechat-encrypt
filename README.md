@@ -1,106 +1,87 @@
 # wechat-encrypt
 
-WeChat open platform session message encryption and decryption module.
-
 微信开放平台会话消息加解密模块。
 
-### Usage
+### 示例代码
 
 ```bash
-npm install wechat-encrypt -S
+npm install wechat-encrypt
 ```
 
 ```javascript
-const Encrypt = require('wechat-encrypt')
+const WechatEncrypt = require('wechat-encrypt')
 
-const encrypt = new Encrypt({
-    appId: 'wxf1569d816b304d28',
-    encodingAESKey: 'WO3Gcs2X5lcNtZagAcaRRjNaAwEmoekP1P2aOKR4W3D',
-    token: 'weixin'
+const wechatEncrypt = new WechatEncrypt({
+    appId: 'wx013591feaf25uoip',
+    encodingAESKey: 'abcdefgabcdefgabcdefgabcdefgabcdefgabcdefg0',
+    token: 'test token'
 })
 
-// 如何解密微信传过来的请求body中的Encrypt
+// 报文主体中 Encrypt 字段的值
+let encrypt = 'elJAUQEY0yKnbLbmXYdacAoDEmJlzdMeB3ryWEtNOQnJ2n1h9Y0ocSYYsW8YsrVrWhJrZe4gKKrzMs1JBCHFNHlFYCMBigDMU41WGxjwulsLjglXd+Cr7Mq/RV7TUwkkqX9+y0KmIIqAl+qYJUnuYvaug5bBMcikP9kDj3OzQ41Oppt0hzNGq7tw6RFplSW75ItMVY6Vi0d+NJTLuvIWwQqDIytcVJnNQFHOTRmm9sUVVm0kNiQp7sQljoif+j/JjMkB1fQXtrwUkLup0ql4vGZ8/126qWFR8p8tmzbDm4U/tdgLYLnEv7XFMT6cmYprmEz3cyN2yWuRfKcCBOgKyUfEt+NYwnE+1l5QK2nbOkMqorqmvc66zo0VYVj4o8nV+laMy3Celz3rDUAJMKXk/FN8ZjOsyn7sDJlo8iAhHtg='
+let timestamp = '1565268520' // 推送消息链接上的 timestamp 字段值
+let nonce = '331748743'	// 推送消息链接上的 nonce 字段值
+let msg_signature = 'f0d525f5e849b1cd8f628eff2121b4d16765b7f2' // 推送消息链接上 msg_signature 字段值
 
-console.log(Http_body)
-
+// 校验消息是否来自微信：取链接上的 timestamp, nonce 字段和报文主体的 Encrypt 字段的值，来生成签名
+// 生成的签名和链接上的 msg_signature 字段值进行对比
+let signature = wechatEncrypt.genSign({ timestamp, nonce, encrypt })
+let isValid = signature === msg_signature
+console.log(`该消息${isValid ? '有效' : '无效'}\n\n`)
 /*
-<xml>
-        <ToUserName><![CDATA[gh_3db049ae940a]]></ToUserName>
-        <Encrypt><![CDATA[XpHWFFBEWSZBmKJvj03anXGY5dEViwYBBnTaPyUkoKzPm1fxcCEv0BwvX+7EFywVTkwQNqFpBqKZj23vJ1QgXi2SshJyvov1hiGfSTIUi2dWpoqH8I2Zhw9XwIkzrOnitGb3vdUAVkSwRTBWtxyTIg3JJPVJPwpLXTYUR+4G2wk5+SIVhBNoepGx7ZwUHK5Sv8ReEDDBwzeFlHl2SAeNA6sH+jvnY8mwNUOxe2fGXge0TteO3U6UWpExJeYuPQIrqNofLcAbPUr7IVkfsm2jqBIH6gWxddNA9U+N0lbQgqKR3LTClM+9GLQFUNLgY7WFyeoZDTIoj8F06uHQTqVd6sGETnFp+c0ff2UQb9bEkJWpZOKnA0cKacw7JyiOUfYmETAdSk6ffULXzqYOYCYlSLxzuFkfO62/hmiHGaMslGNYtwx5Zv31G9kd+Qi1SpGaYJn2q5McnTmht3ptyTyvmQ==]]></Encrypt>
-</xml>
+该消息有效
+
 */
 
-const xmlMsg = encrypt.decode('XpHWFFBEWSZBmKJvj03anXGY5dEViwYBBnTaPyUkoKzPm1fxcCEv0BwvX+7EFywVTkwQNqFpBqKZj23vJ1QgXi2SshJyvov1hiGfSTIUi2dWpoqH8I2Zhw9XwIkzrOnitGb3vdUAVkSwRTBWtxyTIg3JJPVJPwpLXTYUR+4G2wk5+SIVhBNoepGx7ZwUHK5Sv8ReEDDBwzeFlHl2SAeNA6sH+jvnY8mwNUOxe2fGXge0TteO3U6UWpExJeYuPQIrqNofLcAbPUr7IVkfsm2jqBIH6gWxddNA9U+N0lbQgqKR3LTClM+9GLQFUNLgY7WFyeoZDTIoj8F06uHQTqVd6sGETnFp+c0ff2UQb9bEkJWpZOKnA0cKacw7JyiOUfYmETAdSk6ffULXzqYOYCYlSLxzuFkfO62/hmiHGaMslGNYtwx5Zv31G9kd+Qi1SpGaYJn2q5McnTmht3ptyTyvmQ==')
-
-console.log(xmlMsg)
-
+// 解密消息内容。取报文主体的 Encrypt 字段的值进行解密
+let xml = wechatEncrypt.decode(encrypt)
+console.log(`解密后的消息：\n${xml}\n\n`)
 /*
-<xml><ToUserName><![CDATA[gh_3db049ae940a]]></ToUserName>
-<FromUserName><![CDATA[ozKDGv3BQsXV2WDNDynsLnueAujU]]></FromUserName>
-<CreateTime>1502784210</CreateTime>
-<MsgType><![CDATA[text]]></MsgType>
-<Content><![CDATA[Hello World!]]></Content>
-<MsgId>6454409035319957426</MsgId>
-</xml>
+解密后的消息：
+<xml><ToUserName><![CDATA[gh_fd189404d989]]></ToUserName><FromUserName><![CDATA[o9uKB5hniJXLYJTtfjxMSSmo477k]]></FromUserName><CreateTime>1565266686</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[Hello world]]></Content><MsgId>22409229427342621</MsgId></xml>
 */
 
-// 如何加密xml文本
 
-const encodeStr = encrypt.encode(xmlMsg)
-console.log(encodeStr)
-
+// 加密消息。调用 encode 方法，传入待加密的内容，返回加密后的结果
+let encryptedMsg = wechatEncrypt.encode(xml)
+console.log(`加密后的结果：\n${encryptedMsg}\n\n`)
 /*
-XpHWFFBEWSZBmKJvj03anXGY5dEViwYBBnTaPyUkoKzPm1fxcCEv0BwvX+7EFywVTkwQNqFpBqKZj23vJ1QgXi2SshJyvov1hiGfSTIUi2dWpoqH8I2Zhw9XwIkzrOnitGb3vdUAVkSwRTBWtxyTIg3JJPVJPwpLXTYUR+4G2wk5+SIVhBNoepGx7ZwUHK5Sv8ReEDDBwzeFlHl2SAeNA6sH+jvnY8mwNUOxe2fGXge0TteO3U6UWpExJeYuPQIrqNofLcAbPUr7IVkfsm2jqBIH6gWxddNA9U+N0lbQgqKR3LTClM+9GLQFUNLgY7WFyeoZDTIoj8F06uHQTqVd6sGETnFp+c0ff2UQb9bEkJWpZOKnA0cKacw7JyiOUfYmETAdSk6ffULXzqYOYCYlSLxzuFkfO62/hmiHGaMslGNYtwx5Zv31G9kd+Qi1SpGaYJn2q5McnTmht3ptyTyvmQ==
+加密后的结果：
+uF/fQ1LOkmHC4defoc2+h1LxRFXh2dGu4CS71Nm7I2BrWglcchikzFJw1RN9ZsylVyow1kGBj7p9Mrg0m6VGdrSKZ/aCg04Yu9lCCY7YPukf7VpBR+iK8JNiproQTdnXWREar2UPWM06aGPmQTfVcjEN1K5oMA0tOxRFt2jDtjhwCptXw7qPALCT8fJILkjL7z8e//dMCtrrxeh0NENf3oM1AqZq7ZJ/iWHfCPp+hcxNJrNZlzLgKlIuFxb8QwppvA8KyOItM+RZkr286e1hPJqnCpelXrl9MzigrnGH+BjegkQQNrHBco093vrElrOJxYnlJwHOtr/kN54nngFal/Gn1+PRCrvVPxRKE2e/pwTbCMtUbVB+W3FKTnbGDfEvzBJzrPKYmT2Woio3hTjsYEb8Qk/fMc8A8myalD3CD8pjTAY0/dTmo3Iq4jwrhwQ9HnvGxliwZ25lWRxplwQDf4aB6kngfC4tZnrNuDKewUyWr7RKrpGjxV9OtzzbZBaa
 */
 ```
 
-### new Encrypt(options)
+### WechatEncrypt(params)
 
-##### options 参数
-| 名称 | 类型 | 必填 | 描述 |
-| --- | --- | --- | --- |
-| appId | String | 是 | 微信公众号appId。 |
-| token | String | 是 | 微信公众号后台设置的token。 |
-| encodingAESKey | String | 是 | 微信公众号后台设置的encodingAESKey。 |
+**构造函数**
 
-### 方法
+```javascript
+let wechatEncrypt = new WechatEncrypt({ appId, token, encodingAESKey })
+```
 
-- [encode](#encode)
-- [decode](#decode)
-- [verify](#verify)
-- [getSignature](#getsignature)
+## 实例方法：
 
-#### encode
+### encode(msg)
 
-`encode(xmlMsg)` 传入xml文本，返回加密后的base64字符串。
+**加密消息**
 
-#### decode
+```javascript
+let encryptedMsg = wechatEncrypt.encode(rawMsg)
+```
 
-`decode(msg_encrypt)` 传入微信请求body中的Encrypt字段值，返回解密后的xml字符串。
+### decode(msg)
 
-#### verify
+**解密消息**
 
-`verify(data)` 检验消息的完整性。传入微信请求`query`中的`timestamp`, `nonce`, `msg_signature`和请求`body`中的`Encrypt` 返回检验结果`true`或`false`。
+```javascript
+let decryptedMsg = wechatEncrypt.decode(encryptedMsg)
+```
 
-##### data 参数
+### genSign(params)
 
-| 名称 | 类型 | 必填 | 描述 |
-| --- | --- | --- | --- |
-| timestamp | String | 是 | 请求query中的timestamp。 |
-| nonce | String | 是 | 请求query中的nonce。 |
-| msg_signature | String | 是 | 请求query中的msg_signature。 |
-| msg_encrypt | String | 是 | 请求body中的Encrypt。 |
+**生成签名 signature。用于校验消息是否来自微信。回复消息时也需要生成签名。**
 
-#### getSignature
-
-`getSignature(data)` 生成`msg_signature`。传入微信请求`query`中的`timestamp`, `nonce`和请求`body`中的`Encrypt` ，返回生成的`signature`。
-
-##### data 参数
-
-| 名称 | 类型 | 必填 | 描述 |
-| --- | --- | --- | --- |
-| timestamp | String | 是 | 请求query中的timestamp。 |
-| nonce | String | 是 | 请求query中的nonce。 |
-| msg_encrypt | String | 是 | 请求body中的Encrypt。 |
-
+```javascript
+let signature = wechatEncrypt.genSign({ timestamp, nonce, encrypt })
+```
 

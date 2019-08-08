@@ -1,16 +1,19 @@
 {
     "name": "wechat-encrypt",
-    "version": "1.0.0",
-    "description": "WeChat open platform session message encryption and decryption module.",
+    "version": "1.1.0",
+    "description": "微信开放平台会话消息加解密工具",
     "main": "lib/encrypt.js",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/pengng/wechat-encrypt.git"
     },
     "keywords": [
-        "wechat",
-        "encrypt",
-        "message"
+        "加密",
+        "解密",
+        "消息",
+        "开放平台",
+        "微信公众号",
+        "wechat"
     ],
     "author": "yupeng.kuo <yupeng.kuo@gmail.com>",
     "license": "ISC",
