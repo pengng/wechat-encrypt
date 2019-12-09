@@ -1,6 +1,6 @@
 {
     "name": "wechat-encrypt",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "微信开放平台会话消息加解密工具",
     "main": "lib/encrypt.js",
     "repository": {
