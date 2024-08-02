@@ -17,7 +17,7 @@ const wechatEncrypt = new WechatEncrypt({
     token: 'test token'
 })
 
-// 报文主体中 Encrypt 字段的值
+// 报文主体中 Encrypt 字段的值(注意微信推送消息体的格式为 XML)
 let encrypt = 'elJAUQEY0yKnbLbmXYdacAoDEmJlzdMeB3ryWEtNOQnJ2n1h9Y0ocSYYsW8YsrVrWhJrZe4gKKrzMs1JBCHFNHlFYCMBigDMU41WGxjwulsLjglXd+Cr7Mq/RV7TUwkkqX9+y0KmIIqAl+qYJUnuYvaug5bBMcikP9kDj3OzQ41Oppt0hzNGq7tw6RFplSW75ItMVY6Vi0d+NJTLuvIWwQqDIytcVJnNQFHOTRmm9sUVVm0kNiQp7sQljoif+j/JjMkB1fQXtrwUkLup0ql4vGZ8/126qWFR8p8tmzbDm4U/tdgLYLnEv7XFMT6cmYprmEz3cyN2yWuRfKcCBOgKyUfEt+NYwnE+1l5QK2nbOkMqorqmvc66zo0VYVj4o8nV+laMy3Celz3rDUAJMKXk/FN8ZjOsyn7sDJlo8iAhHtg='
 let timestamp = '1565268520' // 推送消息链接上的 timestamp 字段值
 let nonce = '331748743'	// 推送消息链接上的 nonce 字段值
